@@ -1,25 +1,17 @@
-import { Inject, Service } from "typedi";
-import { UserRepository } from "./user.repository";
 import { Request, Response } from "express";
+import { IUserService } from "./user.service";
+import { inject, injectable } from "inversify";
+import { TYPES } from "../types";
+import { Autobind } from "../utils/autobind";
 
-@Service()
-class UserController {
-  private userRepository: UserRepository;
+@Autobind()
+@injectable()
+export class UserController {
+  protected name = "Kimsang";
+  constructor(@inject(TYPES.IUserService) private userService: IUserService) {}
 
-  constructor(
-    @Inject((type) => UserRepository) usersRepository: UserRepository
-  ) {
-    console.log(usersRepository);
-    this.userRepository = usersRepository;
-  }
-
-  //   async getAllUsers() {
-  //     return await this.userRepository.findAll();
-  //   }
   async getAllUsers(req: Request, res: Response) {
-    const result = await this.userRepository.findAll();
-    res.status(200).json(result);
+    const users = await this.userService.getUser();
+    res.json(users);
   }
 }
-
-export default UserController;

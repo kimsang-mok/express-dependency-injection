@@ -1,12 +1,10 @@
 import express from "express";
-import Container from "typedi";
-import UserController from "./user.controller";
-import { UserRepository } from "./user.repository";
-import "reflect-metadata";
+import { container } from "../configs/inversify.config";
+import { UserController } from "./user.controller";
 
 const router = express.Router();
+const userController = container.resolve(UserController);
 
-const userController = Container.get(UserController);
-router.route("/").get(userController.getAllUsers);
+router.route("/users").get(userController.getAllUsers);
 
 export default router;

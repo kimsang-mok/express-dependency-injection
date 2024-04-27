@@ -1,13 +1,18 @@
-import { Service } from "typedi";
+import { injectable } from "inversify";
 
-interface User {
+export interface User {
   id: number;
   name: string;
 }
 
-@Service()
-export class UserRepository {
-  async findAll(): Promise<User[]> {
+export interface IUserRepository {
+  findAll(): Promise<Array<User>>;
+  add(user: User): Promise<User>;
+}
+
+@injectable()
+export class UserRepository implements IUserRepository {
+  async findAll(): Promise<Array<User>> {
     return [
       {
         id: 1,

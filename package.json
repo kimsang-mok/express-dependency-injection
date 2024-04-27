@@ -17,8 +17,8 @@
   "license": "ISC",
   "dependencies": {
     "express": "^4.19.2",
-    "reflect-metadata": "^0.2.2",
-    "typedi": "^0.10.0"
+    "inversify": "^6.0.2",
+    "reflect-metadata": "^0.2.2"
   },
   "devDependencies": {
     "@types/express": "^4.17.21",

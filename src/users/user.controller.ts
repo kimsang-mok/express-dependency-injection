@@ -7,7 +7,6 @@ import { Autobind } from "../utils/autobind";
 @Autobind()
 @injectable()
 export class UserController {
-  protected name = "Kimsang";
   constructor(@inject(TYPES.IUserService) private userService: IUserService) {}
 
   async getAllUsers(req: Request, res: Response) {

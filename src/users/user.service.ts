@@ -1,5 +1,5 @@
-import { inject, injectable } from "inversify";
-import { User, UserRepository, IUserRepository } from "./user.repository";
+import { inject, injectable, named } from "inversify";
+import { User, IUserRepository, ISaySomething } from "./user.repository";
 import { TYPES } from "../types";
 
 export interface IUserService {
@@ -8,13 +8,16 @@ export interface IUserService {
 
 @injectable()
 export class UserService implements IUserService {
-  protected userRepository: UserRepository;
-
-  constructor(@inject(TYPES.IUserRepository) userRepository: IUserRepository) {
+  constructor(
+    @inject(TYPES.IUserRepository)
+    @named(TYPES.UserRepository)
+    protected userRepository: IUserRepository & ISaySomething
+  ) {
     this.userRepository = userRepository;
   }
 
   async getUser(): Promise<Array<User>> {
+    console.log(this.userRepository.sayHello());
     return await this.userRepository.findAll();
   }
 }

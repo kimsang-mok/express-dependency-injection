@@ -2,14 +2,14 @@
   "name": "express-dependency-injection",
   "version": "1.0.0",
   "description": "Express with dependency injection",
-  "main": "dist/server.js",
+  "main": "dist/src/server.js",
   "scripts": {
     "start": "node run serve",
     "build-ts": "npx tsc",
     "tslint": "tslint -c tslint.json -p tsconfig.json --fix",
     "build": "concurrently \"npm run tslint\" \"npm run build-ts\"",
-    "serve": "node dist/server.js",
-    "watch-node": "nodemon dist/server.js",
+    "serve": "node dist/src/server.js",
+    "watch-node": "nodemon dist/src/server.js",
     "watch-ts": "tsc -w",
     "watch": "concurrently -k -p \"[{name}]\" -c \"yellow.bold,cyan.bold,green.bold\" \"npm run watch-ts\" \"npm run watch-node\"",
     "test": "jest"
